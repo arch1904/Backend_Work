@@ -9,18 +9,18 @@ def get_authenticated_API():
     return api
 
 api = get_authenticated_API()
+
 def search(query):
     l=[]
     for tweet in tweepy.Cursor(api.search, q=query).items(10):
         l.append(str(tweet))
-    with open ('tweets.json','w') as f:
-        json.dump(l,f)
-    return l
-def search_location(lat,long,radius):
+    str1=json.dumps(l)
+    return str1
+
+def search_location(query):
+    query=query.split(",")
     l=[]
-    for tweet in tweepy.Cursor(api.search,geocode=str(lat)+","+str(long)+","+str(radius)).items(10):
+    for tweet in tweepy.Cursor(api.search,geocode=str(query[0])+","+str(query[1])+","+str(query[2])).items(10):
         l.append(str(tweet))
-    with open ('tweets.json','w') as f:
-        json.dump(l,f)
-    return l
-#search('#Dodgers')
+        str1=json.dumps(l)
+    return str1
