@@ -6,4 +6,4 @@ def wiki(query):
 	stuff = ""
 	wiki_search = wikipedia.summary(query)
 	return wiki_search
-wiki("Eminem")
+print wiki("Eminem")

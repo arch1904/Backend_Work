@@ -1,5 +1,8 @@
 import json
 import tweepy
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 def get_authenticated_API():
     auth = tweepy.OAuthHandler('SKuaMZ6iWCkHhnQBXvDmim5WF', 'm0TkxhZ6l2UIFk3BpMh8TJgAVw45kpBxF54lnhdAfIQq9xLx7J')
@@ -11,16 +14,16 @@ def get_authenticated_API():
 api = get_authenticated_API()
 
 def search(query):
-    l=[]
+    l=""   
     for tweet in tweepy.Cursor(api.search, q=query).items(10):
-        l.append(str(tweet))
-    str1=json.dumps(l)
-    return str1
+        l+=tweet.text+'\n\n'
+    return l
 
 def search_location(query):
     query=query.split(",")
     l=[]
     for tweet in tweepy.Cursor(api.search,geocode=str(query[0])+","+str(query[1])+","+str(query[2])).items(10):
-        l.append(str(tweet))
-        str1=json.dumps(l)
-    return str1
+        l.append(tweet.text)
+    return l
+
+print(search_location("49,85,2"))
