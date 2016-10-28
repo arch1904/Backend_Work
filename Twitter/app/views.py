@@ -1,15 +1,11 @@
 from flask import Flask, request
 from app import app
 import twitter
+import spotify
 # static url
 @app.route('/')
 def index():
-    return "Hello, World!\n" + "For Hashtag: /hashtag?hash=# \n"+ "For KeyWord: /word?word= \n "+ "For GeoLocation: /location?location=latitude,longitude,radiuswithunit"
-
-# url parameters
-@app.route('/endpoint/<input>')
-def endpoint(input):
-    return input
+    return None
 
 # api with endpoint for hashtag
 @app.route('/hashtag', methods=['GET'])
@@ -34,3 +30,11 @@ def location():
     if 'location' in request.args:
         return twitter.search('location')
     return "Wrong"
+
+@app.route('/playlist',methods=['GET'])
+def playlist():
+    l=[]
+    if 'artist' in request.args:
+        return spotify.search(artist)
+    return "Wrong"
+
