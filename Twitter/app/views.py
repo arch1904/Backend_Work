@@ -11,7 +11,7 @@ def index():
 def hashtag():
     l=[]
     if 'hash' in request.args:
-        return twitter.search('hash')
+        return twitter.search(request.args['hash'])
     return "Wrong!"
 
 #api with endpoint for KeyWord
@@ -19,7 +19,7 @@ def hashtag():
 def key_word():
     l=[]
     if 'word' in request.args:
-        return twitter.search('word')
+        return twitter.search(request.args['word'])
     return "Wrong!"
 
 #api with endpoint for GeoLocation
@@ -27,6 +27,6 @@ def key_word():
 def location():
     l=[]
     if 'location' in request.args:
-        return twitter.search('location')
+        return twitter.search_location(request.args['location'])
     return "Wrong"
 
