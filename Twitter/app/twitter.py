@@ -14,16 +14,16 @@ def get_authenticated_API():
 api = get_authenticated_API()
 
 def search(query):
-    l=""   
+    l=[]   
     for tweet in tweepy.Cursor(api.search, q=query).items(10):
-        l+=tweet.text+'\n\n'
-    return l
+        l.append(tweet.text)
+    str1=json.dumps(l)
+    return str1
 
 def search_location(query):
     query=query.split(",")
     l=[]
     for tweet in tweepy.Cursor(api.search,geocode=str(query[0])+","+str(query[1])+","+str(query[2])).items(10):
         l.append(tweet.text)
-    return l
-
-print(search_location("49,85,2"))
+    str1=json.dumps(l)
+    return str1

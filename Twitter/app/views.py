@@ -1,7 +1,6 @@
 from flask import Flask, request
 from app import app
 import twitter
-import spotify
 # static url
 @app.route('/')
 def index():
@@ -29,12 +28,5 @@ def location():
     l=[]
     if 'location' in request.args:
         return twitter.search('location')
-    return "Wrong"
-
-@app.route('/playlist',methods=['GET'])
-def playlist():
-    l=[]
-    if 'artist' in request.args:
-        return spotify.search(artist)
     return "Wrong"
 
